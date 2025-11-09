@@ -1,0 +1,65 @@
+.icons {
+    font-size: 32px;
+    height: 32px;
+    width: 32px;
+    color: #ddd;
+    cursor: pointer;
+}
+
+.icons:hover {
+    color: red;
+}
+
+.icon-con {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    padding: 7px;
+    background-color: #fff;
+    margin: 7px;
+}
+
+.links {
+    text-decoration: none;
+    font-size: 24px;
+    color: #002f34;
+    font-weight: bold;
+}
+
+.price-text {
+    color: #002f34;
+
+}
+
+.clear-btn {
+    height: 24px;
+    background-color: #002f34;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 12px;
+    outline: none;
+    border: none;
+    padding: 0px 15px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+
+.clear-filter-btn {
+    background-color: #002f34;
+    color: #fff;
+    border: none;
+    border-radius: 15px; 
+    padding: 5px 15px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 15px;
+    transition: background-color 0.2s;
+    height: fit-content;
+}
+
+.clear-filter-btn:hover {
+    background-color: #004a52;
+}
