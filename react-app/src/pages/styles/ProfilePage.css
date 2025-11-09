@@ -1,0 +1,30 @@
+/* src/styles/ProfilePage.css */
+
+.profile-details {
+    width: 100%;
+    padding-top: 20px;
+}
+
+.profile-field {
+    margin-bottom: 20px;
+}
+
+.profile-label {
+    display: block;
+    color: #999999;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    padding-left: 15px;
+}
+
+.profile-value {
+    display: block;
+    width: 100%;
+    background: #f7f7f7;
+    border-radius: 25px;
+    padding: 15px 30px;
+    font-size: 16px;
+    color: #404040;
+    border: 1px solid #e6e6e6;
+}
