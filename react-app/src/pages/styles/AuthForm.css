@@ -1,0 +1,72 @@
+/* src/styles/AuthForm.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.auth-limiter {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.auth-container {
+    width: 100%;  
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background: #f2f2f2;
+}
+
+.auth-wrap {
+    width: 500px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 55px 55px 37px 55px;
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form-title {
+    display: block;
+    font-size: 30px;
+    color: #333333;
+    line-height: 1.2;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.auth-form-icon {
+    font-size: 60px;
+    color: #555;
+    text-align: center;
+    width: 100%;
+    display: block;
+    padding-bottom: 30px;
+}
+
+.bottom-text {
+    text-align: center;
+    padding-top: 40px;
+}
+
+.bottom-text .text1 {
+    color: #666666;
+}
+
+.bottom-text .text2 {
+    color: #333333;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+.bottom-text .text2:hover {
+    text-decoration: underline;
+}
