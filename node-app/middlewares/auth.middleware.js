@@ -20,6 +20,7 @@ const authMiddleware = (req, res, next) => {
 
     } catch (error) {
         // Captura erros de token expirado ou inválido
+        console.log(error);
         res.status(401).send({ message: 'Token inválido ou expirado.' });
     }
 };

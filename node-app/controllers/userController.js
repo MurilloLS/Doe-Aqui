@@ -30,6 +30,7 @@ module.exports.login = async (req, res) => {
     try {
         const { username, password } = req.body;
         const user = await Users.findOne({ username });
+        console.log(username);
         if (!user) {
             return res.status(404).send({ message: 'Utilizador ou palavra-passe inválidos.' });
         }

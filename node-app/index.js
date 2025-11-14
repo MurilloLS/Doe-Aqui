@@ -7,6 +7,7 @@ const connectDB = require('./config/database'); // Importar a sua função de li
 // Importar as rotas
 const productRoutes = require('./routes/product.routes.js');
 const userRoutes = require('./routes/user.routes.js');
+const messageRoutes = require(`./routes/message.routes.js`)
 
 // --- Inicialização e Configuração Essencial ---
 const app = express();
@@ -34,6 +35,9 @@ app.use('/api/products', productRoutes);
 
 // Todas as rotas de utilizador serão prefixadas com /api/users
 app.use('/api/users', userRoutes);
+
+// Todas as rotas de utilizador serão prefixadas com /api/users
+app.use('/api/messages', messageRoutes);
 
 
 // --- Arranque do Servidor ---
