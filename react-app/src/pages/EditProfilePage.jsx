@@ -67,8 +67,8 @@ function EditProfilePage() {
                     <form className="auth-form" onSubmit={handleUpdate}>
                         <span className="auth-form-title">Editar Perfil</span>
                         
-                        <div className="form-input-wrap"><input className="form-input" placeholder="Nome de Utilizador" type="text" name="username" value={user.username || ''} onChange={handleInputChange} /></div>
-                        <div className="form-input-wrap"><input className="form-input" placeholder="Telemóvel" type="text" name="mobile" value={user.mobile || ''} onChange={handleInputChange} /></div>
+                        <div className="form-input-wrap"><input className="form-input" placeholder="Nome de Usuario" type="text" name="username" value={user.username || ''} onChange={handleInputChange} /></div>
+                        <div className="form-input-wrap"><input className="form-input" placeholder="Telefone" type="text" name="mobile" value={user.mobile || ''} onChange={handleInputChange} /></div>
                         <div className="form-input-wrap"><input className="form-input" placeholder="Email" type="email" name="email" value={user.email || ''} onChange={handleInputChange} /></div>
                         <div className="form-input-wrap"><input className="form-input" placeholder="Documento (CPF/CNPJ)" type="text" name="document" value={user.document || ''} onChange={handleInputChange} /></div>
                         <div className="form-input-wrap"><input className="form-input" placeholder="Cidade" type="text" name="location_city" value={user.location_city || ''} onChange={handleInputChange} /></div>
