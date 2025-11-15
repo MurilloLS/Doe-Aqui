@@ -2,18 +2,19 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
-const upload = require('../middlewares/upload.middleware');
+const uploadS3 = require('../middlewares/uploadS3.middleware');
+const { fixS3Urls } = require('../middlewares/uploadS3.middleware');
 const authMiddleware = require('../middlewares/auth.middleware');
 
 // --- ROTAS DE AUTENTICAÇÃO (Públicas) ---
-router.post('/signup', upload.single('profilePic'), userController.signup);
+router.post('/signup', uploadS3.single('profilePic'), fixS3Urls, userController.signup);
 router.post('/login', userController.login);
 
 
 // --- ROTAS DE GESTÃO DE PERFIL (Protegidas) ---
 
 router.get('/me', authMiddleware, userController.myProfile);
-router.put('/me', authMiddleware, upload.single('profilePic'), userController.updateUser);
+router.put('/me', authMiddleware, uploadS3.single('profilePic'), fixS3Urls, userController.updateUser);
 
 
 // --- ROTAS DE "LIKES" DO UTILIZADOR (Protegidas) ---

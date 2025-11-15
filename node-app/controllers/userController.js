@@ -4,6 +4,39 @@ const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
 
+const { DeleteObjectCommand } = require('@aws-sdk/client-s3');
+const s3 = require('../config/aws'); // Importar o cliente S3 configurado
+
+/**
+ * Extrai a "Key" (caminho) do arquivo a partir da URL completa do S3.
+ * Ex: https://bucket.s3.region.amazonaws.com/folder/key.jpg -> folder/key.jpg
+ */
+const getKeyFromUrl = (url) => {
+    try {
+        const urlObj = new URL(url);
+        return urlObj.pathname.substring(1); 
+    } catch (err) {
+        console.error("Erro ao extrair key do URL:", url, err);
+        return null;
+    }
+};
+
+const deleteS3Object = async (key) => {
+    if (!key) return;
+    
+    const command = new DeleteObjectCommand({
+        Bucket: process.env.AWS_S3_BUCKET,
+        Key: key,
+    });
+
+    try {
+        await s3.send(command);
+        console.log(`Sucesso: Objeto ${key} apagado do S3.`);
+    } catch (err) {
+        console.error(`Erro ao apagar objeto ${key} do S3:`, err);
+    }
+};
+
 // --- ROTAS PÚBLICAS ---
 
 module.exports.signup = async (req, res) => {
@@ -13,7 +46,7 @@ module.exports.signup = async (req, res) => {
         const user = new Users({
             ...userData,
             password: hashedPassword,
-            profilePic: req.file ? req.file.path : null
+            profilePic: req.file ? req.file.location : null
         });
         await user.save();
         res.status(201).send({ message: 'Utilizador registado com sucesso.' });
@@ -38,7 +71,7 @@ module.exports.login = async (req, res) => {
             return res.status(401).send({ message: 'Utilizador ou palavra-passe inválidos.' });
         }
         const userForToken = { _id: user._id, username: user.username, user_type: user.user_type };
-        const token = jwt.sign({ data: userForToken }, 'MYKEY', { expiresIn: '1h' });
+        const token = jwt.sign({ data: userForToken }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.send({ message: 'Login bem-sucedido.', token, userId: user._id });
     } catch (error) {
         console.error("Erro no Login:", error);
@@ -65,19 +98,30 @@ module.exports.myProfile = async (req, res) => {
 module.exports.updateUser = async (req, res) => {
     try {
         const userId = req.user._id;
+
+        const oldUser = await Users.findById(userId);
+        if (!oldUser) {
+            return res.status(404).send({ message: 'Utilizador não encontrado.' });
+        }
+
         const { password, ...otherData } = req.body;
         const updatedData = { ...otherData };
-        if (req.file) {
-            updatedData.profilePic = req.file.path;
+
+        if (req.file) { // 'profilePic' é um 'single' upload, vem em req.file
+            if (oldUser.profilePic) {
+                await deleteS3Object(getKeyFromUrl(oldUser.profilePic));
+            }
+            updatedData.profilePic = req.file.location;
         }
+
         if (password) {
             updatedData.password = await bcrypt.hash(password, saltRounds);
         }
+
         const updatedUser = await Users.findByIdAndUpdate(userId, updatedData, { new: true });
-        if (!updatedUser) {
-            return res.status(404).send({ message: 'Utilizador não encontrado.' });
-        }
+        
         res.send({ message: 'Perfil atualizado com sucesso.', user: updatedUser });
+
     } catch (err) {
         if (err.code === 11000) {
             return res.status(400).send({ message: 'Email ou Documento já existem.' });
