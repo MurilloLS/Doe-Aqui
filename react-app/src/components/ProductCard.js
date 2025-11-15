@@ -7,7 +7,8 @@ import '../pages/styles/Carousel.css';
 function ProductCard({ product }) {
     const navigate = useNavigate();
     const { likedProductIds, likeProduct, unlikeProduct } = useLikedProducts();
-    const API_BASE_URL = 'http://localhost:4000';
+
+    console.log('🖼️ Produto:', product.pname, 'Imagem:', product.pimage);
 
     const isLiked = likedProductIds.has(product._id);
 
@@ -31,7 +32,7 @@ function ProductCard({ product }) {
                 <div onClick={handleToggleLike} className="icon-con" style={{ opacity: 1 }}>
                     <FaHeart className="icons" style={{ color: isLiked ? 'red' : 'grey' }} />
                 </div>
-                <img src={`${API_BASE_URL}/${product.pimage}`} alt={product.pname} />
+                <img src={product.pimage} alt={product.pname} />
             </div>
             <div className="carousel-card-details">
                 <span className="carousel-card-brand">{product.category}</span>

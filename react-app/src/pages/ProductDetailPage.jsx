@@ -11,8 +11,6 @@ function ProductDetailPage() {
     const [product, setProduct] = useState(null);
     const [user, setUser] = useState(null);
     const [showContact, setShowContact] = useState(false);
-    
-    const API_BASE_URL = 'http://localhost:4000';
 
     // Configurações do Carrossel para as imagens extra
     const sliderSettings = {
@@ -53,7 +51,7 @@ function ProductDetailPage() {
         return (
             <>
                 <Header />
-                <p style={{textAlign: 'center', marginTop: '30px'}}>A carregar item...</p>
+                <p style={{textAlign: 'center', marginTop: '30px'}}>Carregando item...</p>
             </>
         );
     }
@@ -68,7 +66,7 @@ function ProductDetailPage() {
             <section className="product-detail-top-section">
                 <div className="product-main-image-container">
                     <img 
-                        src={`${API_BASE_URL}/${product.pimage}`} 
+                        src={product.pimage} 
                         alt={product.pname} 
                         className="product-main-image" 
                     />
@@ -99,7 +97,7 @@ function ProductDetailPage() {
                         {remainingImages.map((image, index) => (
                             <div key={index} className="carousel-image-item">
                                 <img 
-                                    src={`${API_BASE_URL}/${image}`} 
+                                    src={image} 
                                     alt={`${product.pname} - imagem ${index + 2}`} 
                                     className="carousel-image"
                                 />

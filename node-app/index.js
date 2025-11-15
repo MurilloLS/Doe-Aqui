@@ -1,7 +1,7 @@
 // index.js
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
+require('dotenv').config();
 const connectDB = require('./config/database'); // Importar a sua função de ligação à BD
 
 // Importar as rotas
@@ -22,9 +22,6 @@ app.use(cors({ origin: 'http://localhost:3000' }));
 
 // Middleware para fazer o parse de JSON no corpo das requisições
 app.use(express.json());
-
-// Middleware para servir ficheiros estáticos (imagens da pasta 'uploads')
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 // --- Configuração das Rotas ---

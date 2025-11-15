@@ -28,7 +28,7 @@ function SignupPage() {
         switch(field) {
             case 'phone':
                 regex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
-                !regex.test(text) ? setErrorPhone('Número de telemóvel inválido.') : setErrorPhone('');
+                !regex.test(text) ? setErrorPhone('Número de telefone inválido.') : setErrorPhone('');
                 break;
             case 'document':
                 regex = /(^\d{3}\.\d{3}\.\d{3}\-\d{2}$)|(^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$)/;
@@ -93,11 +93,11 @@ function SignupPage() {
                                 <option value="COMPANY">Empresa</option>
                             </select>
                         </div>
-                        <div className="form-input-wrap"><input className="form-input" placeholder="Nome de Utilizador / Organização" type="text" value={username} onChange={(e) => setUsername(e.target.value)} required /></div>
+                        <div className="form-input-wrap"><input className="form-input" placeholder="Nome de Usuario / Organização" type="text" value={username} onChange={(e) => setUsername(e.target.value)} required /></div>
                         
                         {/* Campo Telemóvel com Validação */}
                         <div className="form-input-wrap">
-                            <input className="form-input" placeholder="Telemóvel" type="tel" value={mobile} onChange={(e) => { setMobile(e.target.value); testInput("phone", e.target.value); }} required />
+                            <input className="form-input" placeholder="Telefone" type="tel" value={mobile} onChange={(e) => { setMobile(e.target.value); testInput("phone", e.target.value); }} required />
                         </div>
                         {errorPhone && <p style={{ color: 'red', fontSize: '0.8rem', textAlign: 'center' }}>{errorPhone}</p>}
                         
