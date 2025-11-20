@@ -37,7 +37,7 @@ function MyProfilePage() {
 
                         <div className="profile-details">
                             <div className="profile-field">
-                                <span className="profile-label">Nome de Utilizador</span>
+                                <span className="profile-label">Nome de Usuario</span>
                                 <span className="profile-value">{user.username || '-'}</span>
                             </div>
 
@@ -47,7 +47,7 @@ function MyProfilePage() {
                             </div>
 
                             <div className="profile-field">
-                                <span className="profile-label">Telemóvel</span>
+                                <span className="profile-label">Telefone</span>
                                 <span className="profile-value">{user.mobile || '-'}</span>
                             </div>
                             

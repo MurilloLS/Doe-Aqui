@@ -8,7 +8,6 @@ function Header(props) {
     const [showOver, setShowOver] = useState(false);
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
-    const API_BASE_URL = 'http://localhost:4000';
 
     const isLoggedIn = !!localStorage.getItem('token');
 
@@ -24,6 +23,8 @@ function Header(props) {
         if (isLoggedIn) {
             userService.getMyProfile()
                 .then(res => {
+                    console.log('✅ Perfil recebido:', res.data.user);
+                    console.log('🖼️ profilePic:', res.data.user?.profilePic);
                     setUser(res.data.user);
                 })
                 .catch(err => {
@@ -52,7 +53,7 @@ function Header(props) {
                         <div onClick={() => setShowOver(!showOver)} style={{ cursor: 'pointer' }}>
                             {user.profilePic ? (
                                 <img
-                                    src={`${API_BASE_URL}/${user.profilePic}`}
+                                    src={user.profilePic}
                                     alt="Perfil"
                                     style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }}
                                 />
