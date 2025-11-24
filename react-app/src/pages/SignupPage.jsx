@@ -5,6 +5,8 @@ import '../pages/styles/AuthForm.css';
 import '../pages/styles/FormControls.css';
 import toast from "react-hot-toast";
 
+import logoImage from '../assets/logo.png';
+
 function SignupPage() {
     const navigate = useNavigate();
     
@@ -85,6 +87,11 @@ function SignupPage() {
             <div className="auth-container">
                 <div className="auth-wrap">
                     <form className="auth-form" onSubmit={handleSignup} noValidate>
+                        
+                        <span className="auth-form-icon" style={{ height: '80px', display: 'flex', justifyContent: 'center' }}>
+                            <img src={logoImage} alt="Doe-Aqui Logo" style={{ height: '100%', width: 'auto' }} />
+                        </span>
+                        
                         <span className="auth-form-title">Criar Conta</span>
 
                         <div className="form-input-wrap">

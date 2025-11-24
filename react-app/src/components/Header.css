@@ -5,6 +5,11 @@
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .1);
 }
 
+.header {
+    display: flex;
+    align-items: center; 
+}
+
 .cat-container {
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .1);
     padding: 8px 20px;
@@ -17,7 +22,8 @@
 }
 
 .search {
-    margin-left: 80px;
+    /* Reduzi a margem esquerda para compensar o espaço extra removido da logo no JSX */
+    margin-left: 20px; 
     outline: none;
     padding-left: 10px;
     width: 400px;
