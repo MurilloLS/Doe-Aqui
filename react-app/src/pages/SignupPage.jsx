@@ -3,6 +3,7 @@ import { useState } from "react";
 import userService from "../services/userService";
 import '../pages/styles/AuthForm.css';
 import '../pages/styles/FormControls.css';
+import toast from "react-hot-toast";
 
 function SignupPage() {
     const navigate = useNavigate();
@@ -68,14 +69,14 @@ function SignupPage() {
 
             userService.signup(formData)
                 .then((res) => {
-                    alert(res.data.message);
+                    toast.success(res.data.message);
                     navigate('/login');
                 })
                 .catch((err) => {
-                    alert(err.response?.data?.message || 'Erro no servidor.');
+                    toast.error(err.response?.data?.message || 'Erro no servidor.');
                 });
         } else {
-            alert('Utilizador não registado. Verifique se todos os campos estão preenchidos corretamente e sem erros.');
+            toast.error('Usuario não registado. Verifique se todos os campos estão preenchidos corretamente e sem erros.');
         }
     };
 

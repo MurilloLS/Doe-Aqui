@@ -3,6 +3,7 @@ import { useState } from "react";
 import userService from "../services/userService";
 import '../pages/styles/AuthForm.css';
 import '../pages/styles/FormControls.css'; 
+import toast from "react-hot-toast";
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -16,11 +17,12 @@ function LoginPage() {
                 if (res.data.token) {
                     localStorage.setItem('token', res.data.token);
                     localStorage.setItem('userId', res.data.userId);
+                    toast.success('Login bem-sucedido!');
                     navigate('/');
                 }
             })
             .catch((err) => {
-                alert(err.response?.data?.message || 'Erro no servidor.');
+                toast.error(err.response?.data?.message || 'Erro no servidor.');
             });
     };
 

@@ -4,6 +4,7 @@ import ProductCard from "../components/ProductCard";
 import { useLikedProducts } from "../contexts/LikedProductsContext";
 import userService from "../services/userService";
 import '../pages/styles/Carousel.css'; 
+import toast from "react-hot-toast";
 
 function LikedProductsPage() {
     const [products, setProducts] = useState([]);
@@ -16,7 +17,7 @@ function LikedProductsPage() {
                     setProducts(res.data.products || []);
                 })
                 .catch((err) => {
-                    alert(err.response?.data?.message || 'Erro no servidor.');
+                    toast.error(err.response?.data?.message || 'Erro no servidor.');
                     setProducts([]);
                 });
         }

@@ -5,6 +5,7 @@ import categories from "../components/CategoriesList";
 import productService from "../services/productService";
 import '../pages/styles/AuthForm.css';
 import '../pages/styles/FormControls.css';
+import toast from "react-hot-toast";
 
 function EditProductPage() {
     const navigate = useNavigate();
@@ -26,7 +27,7 @@ function EditProductPage() {
                     setCategory(product.category);
                 }
             })
-            .catch((err) => alert(err.response?.data?.message || 'Erro ao buscar dados do produto.'));
+            .catch((err) => toast.error(err.response?.data?.message || 'Erro ao buscar dados do produto.'));
     }, [productId]);
 
     const handleUpdate = (e) => {
@@ -40,10 +41,10 @@ function EditProductPage() {
 
         productService.updateProduct(productId, formData)
             .then((res) => {
-                alert(res.data.message);
+                toast.success(res.data.message);
                 navigate('/my-products');
             })
-            .catch((err) => alert(err.response?.data?.message || 'Erro no servidor ao atualizar produto.'));
+            .catch((err) => toast.error(err.response?.data?.message || 'Erro no servidor ao atualizar produto.'));
     };
 
     return (

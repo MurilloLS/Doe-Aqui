@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import userService from "../services/userService";
 import '../pages/styles/AuthForm.css';      
 import '../pages/styles/FormControls.css';  
-import '../pages/styles/ProfilePage.css';   
+import '../pages/styles/ProfilePage.css';
+import toast from "react-hot-toast";  
 
 function MyProfilePage() {
     const [user, setUser] = useState({});
@@ -22,7 +23,7 @@ function MyProfilePage() {
                     setUser(res.data.user);
                 }
             })
-            .catch((err) => alert(err.response?.data?.message || 'Erro no servidor.'));
+            .catch((err) => toast.error(err.response?.data?.message || 'Erro no servidor.'));
     }, [navigate]);
 
     return (

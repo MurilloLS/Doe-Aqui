@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Slider from "react-slick"; // Importa o componente do carrossel
+import Slider from "react-slick"; 
 import Header from "../components/Header";
 import productService from "../services/productService";
 import userService from "../services/userService";
-import './styles/ProductDetailPage.css'; // Importa o novo CSS
+import './styles/ProductDetailPage.css'; 
+import toast from "react-hot-toast";
 
 function ProductDetailPage() {
     const { productId } = useParams();
@@ -32,7 +33,7 @@ function ProductDetailPage() {
                     setProduct(res.data.product);
                 }
             })
-            .catch((err) => alert(err.response?.data?.message || 'Erro no servidor.'));
+            .catch((err) => toast.error(err.response?.data?.message || 'Erro no servidor.'));
     }, [productId]);
 
     const handleShowContact = () => {
@@ -43,7 +44,7 @@ function ProductDetailPage() {
                 .then((res) => {
                     if (res.data.user) setUser(res.data.user);
                 })
-                .catch((err) => alert(err.response?.data?.message || 'Erro no servidor.'));
+                .catch((err) => toast.error(err.response?.data?.message || 'Erro no servidor.'));
         }
     };
 
@@ -82,7 +83,7 @@ function ProductDetailPage() {
                         <div className="contact-card">
                             <h5>Informações do Doador</h5>
                             <p><strong>Nome:</strong> {user.username}</p>
-                            {user.mobile && <p><strong>Telemóvel:</strong> {user.mobile}</p>}
+                            {user.mobile && <p><strong>Telefone:</strong> {user.mobile}</p>}
                             {user.email && <p><strong>Email:</strong> {user.email}</p>}
                         </div>
                     )}

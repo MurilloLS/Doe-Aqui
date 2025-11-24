@@ -5,6 +5,7 @@ import ProductCard from "../components/ProductCard";
 import productService from "../services/productService";
 import '../pages/styles/Carousel.css';
 import '../components/Home.css'; 
+import toast from "react-hot-toast";
 
 function HomePage() {
     const [products, setProducts] = useState([]);
@@ -15,7 +16,7 @@ function HomePage() {
     useEffect(() => {
         productService.getProducts()
             .then((res) => setProducts(res.data.products))
-            .catch((err) => console.error('Erro ao buscar produtos:', err));
+            .catch((err) => toast.error('Erro ao buscar produtos:', err));
     }, []);
 
     const handleCategoryFilter = (category) => {
@@ -28,7 +29,7 @@ function HomePage() {
                 setFilteredProducts(res.data.products);
                 setIsFiltered(true);
             })
-            .catch((err) => console.error('Erro ao filtrar por categoria:', err));
+            .catch((err) => toast.error('Erro ao filtrar por categoria:', err));
     };
 
     const clearFilter = () => {
@@ -45,7 +46,7 @@ function HomePage() {
                 setFilteredProducts(res.data.products);
                 setIsFiltered(true);
             })
-            .catch((err) => console.error('Erro ao buscar produtos:', err));
+            .catch((err) => toast.error('Erro ao buscar produtos:', err));
     };
 
 

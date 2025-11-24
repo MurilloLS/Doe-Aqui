@@ -3,6 +3,7 @@ import './Header.css';
 import { FaSearch } from "react-icons/fa";
 import { useState, useEffect, useCallback } from 'react';
 import userService from '../services/userService';
+import toast from "react-hot-toast";
 
 function Header(props) {
     const [showOver, setShowOver] = useState(false);
@@ -12,6 +13,7 @@ function Header(props) {
     const isLoggedIn = !!localStorage.getItem('token');
 
     const handleLogout = useCallback(() => {
+        toast.success('Logout realizado com sucesso.');
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
         localStorage.removeItem('userLoc');

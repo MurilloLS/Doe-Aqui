@@ -5,6 +5,7 @@ import Categories from "../components/Categories";
 import ProductCard from "../components/ProductCard";
 import productService from "../services/productService";
 import './../components/Home.css';
+import toast from "react-hot-toast";
 
 function CategoryPage() {
     const { catName } = useParams();
@@ -15,7 +16,7 @@ function CategoryPage() {
             .then((res) => {
                 setProducts(res.data.products);
             })
-            .catch((err) => alert(err.response?.data?.message || 'Erro no servidor.'));
+            .catch((err) => toast.error(err.response?.data?.message || 'Erro no servidor.'));
     }, [catName]);
     
     return (

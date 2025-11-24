@@ -2,6 +2,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { LikedProductsProvider } from './contexts/LikedProductsContext';
+import { Toaster } from 'react-hot-toast';
 
 // Importar as PÁGINAS
 import HomePage from './pages/HomePage';
@@ -34,6 +35,7 @@ function App() {
     return (
         <LikedProductsProvider>
             <RouterProvider router={router} />
+            <Toaster position="top-right" reverseOrder={false} />
         </LikedProductsProvider>
     );
 }
