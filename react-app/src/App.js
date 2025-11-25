@@ -15,6 +15,7 @@ import MyProductsPage from './pages/MyProductsPage';
 import MyProfilePage from './pages/MyProfilePage';
 import EditProductPage from './pages/EditProductPage';
 import EditProfilePage from './pages/EditProfilePage';
+import ChatPage from './pages/ChatsPage';
 
 const router = createBrowserRouter([
     { path: "/", element: <HomePage /> },
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
     { path: "/my-profile", element: <MyProfilePage /> },
     { path: "/edit-product/:productId", element: <EditProductPage /> },
     { path: "/edit-profile", element: <EditProfilePage /> },
+    { path: "/chats", element: <ChatPage/> },
 ]);
 
 function App() {

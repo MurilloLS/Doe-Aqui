@@ -5,12 +5,28 @@ import Header from "../components/Header";
 import productService from "../services/productService";
 import userService from "../services/userService";
 import './styles/ProductDetailPage.css'; // Importa o novo CSS
+import messageService from "../services/messageService";
+import { useNavigate } from "react-router-dom";
 
 function ProductDetailPage() {
+    let navigate = useNavigate(); 
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
     const [user, setUser] = useState(null);
     const [showContact, setShowContact] = useState(false);
+
+    const sendMessageCallback = (_callback) => {
+        const text = {"text":"Olá, estou interessado(a) no produto " + product.pname}
+        messageService.sendMessage(user._id, text);
+        _callback();
+    }
+
+    const sendMessage = () =>{
+        if(!user) return
+        sendMessageCallback(function(){
+           navigate('/chats');
+        });
+    };
 
     // Configurações do Carrossel para as imagens extra
     const sliderSettings = {
@@ -46,7 +62,7 @@ function ProductDetailPage() {
                 .catch((err) => alert(err.response?.data?.message || 'Erro no servidor.'));
         }
     };
-
+    console.log(user);
     if (!product) {
         return (
             <>
@@ -84,6 +100,7 @@ function ProductDetailPage() {
                             <p><strong>Nome:</strong> {user.username}</p>
                             {user.mobile && <p><strong>Telemóvel:</strong> {user.mobile}</p>}
                             {user.email && <p><strong>Email:</strong> {user.email}</p>}
+                            <button className="contact-button" onClick={sendMessage}>Enviar mensagem</button>
                         </div>
                     )}
                 </div>
