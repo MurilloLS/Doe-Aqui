@@ -111,7 +111,7 @@ Gerenciamento de contas e interação social (likes).
 | **PUT** | `/me` | Atualiza perfil logado. | Suporta atualização de campos e upload de nova `profilePic`. |
 | **GET** | `/:userId` | Perfil público de outro user. | `userId`: ID do utilizador alvo. |
 
-#### ❤️ Likes / Favoritos
+### ❤️ Likes / Favoritos
 
 Endpoints específicos para gerir a lista de interesses.
 
@@ -122,6 +122,19 @@ Endpoints específicos para gerir a lista de interesses.
 | **POST** | `/me/liked-products` | Adiciona like. **Body:** `{ "productId": "..." }` |
 | **DELETE**| `/me/liked-products/:productId` | Remove o like de um produto específico. |
 
+
+### 💬 Mensagens (`/api/messages`)
+
+Rotas para chat privado entre utilizadores. Todas exigem autenticação via token JWT.
+
+**Base URL:** `/api/messages`
+
+| Método | Rota (Endpoint) | Descrição | Parâmetros e Body |
+| :--- | :--- | :--- | :--- |
+| **GET** | `/:id` | Retorna o histórico de conversas entre o utilizador logado e o utilizador alvo (`:id`). | **Params:** `id` (ID do utilizador com quem se fala).<br>**Retorno:** Array de objetos `Message`. |
+| **POST** | `/send/:id` | Envia uma nova mensagem para o utilizador alvo (`:id`). | **Params:** `id` (ID do destinatário).<br>**Body (JSON):**<br>`{`<br>  `"text": "Olá, tenho interesse...",`<br>  `"image": "https://..."` (Opcional)<br>`}` |
+
+> **Nota sobre Real-time:** O backend possui dependências de `socket.io` para comunicação em tempo real, permitindo que mensagens enviadas via API sejam recebidas instantaneamente pelos clientes conectados, sem necessidade de *refresh*.
 -----
 
 ## 5\. Middleware e Fluxos Especiais
