@@ -3,6 +3,9 @@ import { useState } from "react";
 import userService from "../services/userService";
 import '../pages/styles/AuthForm.css';
 import '../pages/styles/FormControls.css'; 
+import toast from "react-hot-toast";
+
+import logoImage from '../assets/logo.png'; 
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -16,11 +19,12 @@ function LoginPage() {
                 if (res.data.token) {
                     localStorage.setItem('token', res.data.token);
                     localStorage.setItem('userId', res.data.userId);
+                    toast.success('Login bem-sucedido!');
                     navigate('/');
                 }
             })
             .catch((err) => {
-                alert(err.response?.data?.message || 'Erro no servidor.');
+                toast.error(err.response?.data?.message || 'Erro no servidor.');
             });
     };
 
@@ -29,11 +33,12 @@ function LoginPage() {
             <div className="auth-container">
                 <div className="auth-wrap">
                     <form className="auth-form" onSubmit={handleLogin}>
+                        <span className="auth-form-icon" style={{ height: '80px', display: 'flex', justifyContent: 'center' }}>
+                            <img src={logoImage} alt="Doe-Aqui Logo" style={{ height: '100%', width: 'auto' }} />
+                        </span>
+                        
                         <span className="auth-form-title">
                             Bem-vindo de Volta
-                        </span>
-                        <span className="auth-form-icon">
-                            <i className="fa fa-handshake-o" aria-hidden="true"></i>
                         </span>
 
                         <div className="form-input-wrap">

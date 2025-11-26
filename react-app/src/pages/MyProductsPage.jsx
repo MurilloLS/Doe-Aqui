@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import productService from "../services/productService";
 import '../pages/styles/Carousel.css';
+import toast from "react-hot-toast";
 
 function MyProductsPage() {
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ function MyProductsPage() {
             .then((res) => {
                 setProducts(res.data.products);
             })
-            .catch((err) => alert(err.response?.data?.message || 'Erro no servidor.'));
+            .catch((err) => toast.error(err.response?.data?.message || 'Erro no servidor.'));
     };
 
     useEffect(() => {
@@ -22,13 +23,13 @@ function MyProductsPage() {
     }, []);
 
     const handleDelete = (productId) => {
-        if (window.confirm("Tem a certeza que quer apagar este produto?")) {
+        if (window.confirm("Tem certeza que quer apagar este produto?")) {
             productService.deleteProduct(productId)
                 .then((res) => {
-                    alert(res.data.message);
+                    toast.success(res.data.message);
                     fetchMyProducts(); 
                 })
-                .catch((err) => alert(err.response?.data?.message || 'Erro no servidor.'));
+                .catch((err) => toast.error(err.response?.data?.message || 'Erro no servidor.'));
         }
     };
 

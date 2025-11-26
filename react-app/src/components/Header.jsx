@@ -3,6 +3,9 @@ import './Header.css';
 import { FaSearch } from "react-icons/fa";
 import { useState, useEffect, useCallback } from 'react';
 import userService from '../services/userService';
+import toast from "react-hot-toast";
+
+import logoImage from '../assets/logo.png'; 
 
 function Header(props) {
     const [showOver, setShowOver] = useState(false);
@@ -12,6 +15,7 @@ function Header(props) {
     const isLoggedIn = !!localStorage.getItem('token');
 
     const handleLogout = useCallback(() => {
+        toast.success('Logout realizado com sucesso.');
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
         localStorage.removeItem('userLoc');
@@ -39,7 +43,13 @@ function Header(props) {
     return (
         <div className='header-container d-flex justify-content-between'>
             <div className="header">
-                <Link className='links' to="/"> HOME </Link>
+                <Link to="/" style={{ height: '44px', display: 'flex', alignItems: 'center' }}> 
+                    <img 
+                        src={logoImage} 
+                        alt="Doe-Aqui Logo" 
+                        style={{ height: '40px', width: 'auto', display: 'block' }} 
+                    /> 
+                </Link>
                 <input className='search'
                     type='text'
                     value={props.search || ''}

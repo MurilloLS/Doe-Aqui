@@ -5,6 +5,7 @@ import categories from "../components/CategoriesList";
 import productService from "../services/productService";
 import '../pages/styles/AuthForm.css';
 import '../pages/styles/FormControls.css';
+import toast from "react-hot-toast";
 
 function AddProductPage() {
     const navigate = useNavigate();
@@ -58,7 +59,7 @@ function AddProductPage() {
 
         // Verificação atualizada para incluir os erros de regex
         if (!pname || !pdesc || !category || !pimage || errorPname || errorPdesc) {
-            alert('Por favor, preencha todos os campos obrigatórios corretamente.');
+            toast.error('Por favor, preencha todos os campos obrigatórios corretamente.');
             return;
         }
 
@@ -80,15 +81,15 @@ function AddProductPage() {
             }
 
             const res = await productService.addProduct(formData);
-            alert(res.data.message);
+            toast.success(res.data.message);
             navigate('/');
 
         } catch (err) {
             if (err.code && err.code === 1) {
-                alert("Você precisa de permitir o acesso à localização para adicionar um produto.");
+                toast.error("Você precisa de permitir o acesso à localização para adicionar um produto.");
             } else {
                 console.error("Erro ao adicionar produto:", err);
-                alert(err.response?.data?.message || 'Ocorreu um erro. Tente novamente.');
+                toast.error(err.response?.data?.message || 'Ocorreu um erro. Tente novamente.');
             }
         } finally {
             setIsSubmitting(false);
@@ -134,7 +135,7 @@ function AddProductPage() {
                             <div className="form-btn-wrap">
                                 <div className="form-btn-bg"></div>
                                 <button type="submit" className="form-btn" disabled={isSubmitting}>
-                                    {isSubmitting ? 'A Enviar...' : 'Submeter'}
+                                    {isSubmitting ? 'Adicionando produto...' : 'Adicionar Produto'}
                                 </button>
                             </div>
                         </div>

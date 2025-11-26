@@ -47,7 +47,9 @@ body, html {
     color: #555;
     text-align: center;
     width: 100%;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding-bottom: 30px;
 }
 

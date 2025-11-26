@@ -3,7 +3,8 @@ import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 import userService from "../services/userService";
 import '../pages/styles/AuthForm.css'; 
-import '../pages/styles/FormControls.css'; 
+import '../pages/styles/FormControls.css';
+import toast from "react-hot-toast"; 
 
 function EditProfilePage() {
     const navigate = useNavigate();
@@ -22,7 +23,7 @@ function EditProfilePage() {
                     setUser(res.data.user);
                 }
             })
-            .catch((err) => alert(err.response?.data?.message || 'Erro ao buscar dados do perfil.'));
+            .catch((err) => toast.error(err.response?.data?.message || 'Erro ao buscar dados do perfil.'));
     }, [navigate]);
 
     const handleInputChange = (e) => {
@@ -50,12 +51,12 @@ function EditProfilePage() {
 
         userService.updateUser(formData)
             .then((res) => {
-                alert(res.data.message);
+                toast.success(res.data.message);
                 navigate('/my-profile');
             })
             .catch((err) => {
                 console.error("Erro ao atualizar o perfil:", err.response);
-                alert(err.response?.data?.message || 'Erro no servidor ao atualizar perfil.');
+                toast.error(err.response?.data?.message || 'Erro no servidor ao atualizar perfil.');
             });
     };
 
